@@ -1,45 +1,32 @@
-#ifndef BITCOINEXCHANGE_HPP
-# define BITCOINEXCHANGE_HPP
+# ifndef BITCOIN_EXCHANGE_HPP
+#define BITCOIN_EXCHANGE_HPP
 
-# include <iostream>
-# include <fstream>
-# include <sstream>
-# include <cctype>
+#include <map>
+#include <vector>
+#include <string>
+#include <cstdlib> // atoi
+#include <cmath>
+#include <cfloat>
+#include <limits> // std::numeric_limits
+#include <stdexcept> // std::runtime_error
+#include <algorithm> // std::max_element
+#include <iostream> // cout
+#include <fstream>  // ifstream
+#include <sstream>  // stringstream
 
-class BitcoinExchange {
+class BitcoinExchange
+{
 	private:
-		unsigned int rate;
-		std::string fileName;
-		std::vector<std::string> lineVector;
+		std::map<std::string, float>	_exchangeRateData;
 	public:
-		BitcoinExchange();
-		BitcoinExchange(std::string fileName);
-		BitcoinExchange(const BitcoinExchange &copy);
-		BitcoinExchange &operator=(const BitcoinExchange &copy);
-		~BitcoinExchange();
-		void getDataLines(std::ifstream &file);
-		void getInputLines(std::ifstream &file);
-		bool checkFile();
-		void checkDateValue();
-		void start();
-		class TheFileEmpty: public std::exception {
-			public:
-				virtual const char *what() const throw() {
-					return "Error: the file is empty!";
-				}
-		};
-		class CouldNotOpen: public std::exception {
-			public:
-				virtual const char *what() const throw() {
-					return "Error: could not open file.";
-				}
-		};
-		class BadFormat: public std::exception {
-			public:
-				virtual const char *what() const throw() {
-					return "Error: the file is not formatted properly.";
-				}
-		};
+		BitcoinExchange(void);
+		~BitcoinExchange(void);
+		BitcoinExchange(const std::string& fileBitcoinExchangeRates);
+		BitcoinExchange(const BitcoinExchange& other);
+		BitcoinExchange& operator=(const BitcoinExchange& other);
+		int isDateValid(const std::string& date) const;
+		float getExchangeRate(const std::string& date, float value) const;
+		void printAllDetails(const std::string& date, float value) const;
 };
 
-#endif
+# endif
