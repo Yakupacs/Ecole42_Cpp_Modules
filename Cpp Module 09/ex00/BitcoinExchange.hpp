@@ -1,18 +1,18 @@
-# ifndef BITCOIN_EXCHANGE_HPP
-#define BITCOIN_EXCHANGE_HPP
+#ifndef BITCOIN_EXCHANGE_HPP
+# define BITCOIN_EXCHANGE_HPP
 
-#include <map>
-#include <vector>
-#include <string>
-#include <cstdlib> // atoi
-#include <cmath>
-#include <cfloat>
-#include <limits> // std::numeric_limits
-#include <stdexcept> // std::runtime_error
-#include <algorithm> // std::max_element
-#include <iostream> // cout
-#include <fstream>  // ifstream
-#include <sstream>  // stringstream
+# include <map>
+# include <vector>
+# include <string>
+# include <cstdlib>
+# include <cmath>
+# include <cfloat>
+# include <limits>
+# include <stdexcept>
+# include <algorithm>
+# include <iostream>
+# include <fstream>
+# include <sstream>
 
 class BitcoinExchange
 {
@@ -29,4 +29,4 @@ class BitcoinExchange
 		void printAllDetails(const std::string& date, float value) const;
 };
 
-# endif
+#endif
