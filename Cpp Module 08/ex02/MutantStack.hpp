@@ -5,7 +5,7 @@
 # include <deque>
 # include <stack>
 
-template <class T>
+template <class T, class Container = std::deque<T> >
 class MutantStack: public std::stack<T> {
 	public:
 		MutantStack(): std::stack<T>(){};

@@ -28,22 +28,22 @@ int RPN::isOperand(const std::string &token) {
 	return (0);
 }
 int RPN::performOperation(const std::string &token) {
-	int operation2 = this->operationsStack.top();
+	int number2 = this->operationsStack.top();
 	this->operationsStack.pop();
 
-	int operation1 = this->operationsStack.top();
+	int number1 = this->operationsStack.top();
 	this->operationsStack.pop();
 
 	if (token == "+")
-		return (operation1 + operation2);
+		return (number1 + number2);
 	else if (token == "-")
-		return (operation1 - operation2);
-	else if (token == "*")
-		return (operation1 * operation2);
+		return (number1 - number2);
+	else if (token == "*") 
+		return (number1 * number2);
 	else if (token == "/") {
-		if (operation2 == 0)
+		if (number2 == 0)
 			throw(std::runtime_error("Error: Division by zero"));
-		return (operation1 / operation2);
+		return (number1 / number2);
 	}
 	throw(std::invalid_argument("Error: Invalid operator"));
 }
@@ -53,9 +53,9 @@ int RPN::parseExpression(const std::string &expression) {
 
 	while (iss >> token) {
 		if (isOperand(token)) {
-			int operand;
-			std::istringstream(token) >> operand;
-			this->operationsStack.push(operand);
+			int number;
+			std::istringstream(token) >> number;
+			this->operationsStack.push(number);
 		} else {
 			if (this->operationsStack.size() < 2)
 				throw(std::invalid_argument("Error: Insufficient operands for operator " + token));
